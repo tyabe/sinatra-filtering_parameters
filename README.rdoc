@@ -1,0 +1,28 @@
+= sinatra-filtering_parameters
+
+* {Homepage}[https://github.com/tyabe/sinatra-filtering_parameters#readme]
+* {Issues}[https://github.com/tyabe/sinatra-filtering_parameters/issues]
+* {Documentation}[http://rubydoc.info/gems/sinatra-filtering_parameters/frames]
+* {Email}[mailto:tyabe at nilidea.com]
+
+== Description
+
+TODO: Description
+
+== Features
+
+== Examples
+
+  require 'sinatra/filtering_parameters'
+
+== Requirements
+
+== Install
+
+  $ gem install sinatra-filtering_parameters
+
+== Copyright
+
+Copyright (c) 2012 Takeshi Yabe
+
+See LICENSE.txt for details.
