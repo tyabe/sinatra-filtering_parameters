@@ -1,5 +1,12 @@
 gem 'rspec', '~> 2.4'
 require 'rspec'
-require 'sinatra/filtering_parameters/version'
+require 'rack/test'
 
-include Sinatra::FilteringParameters
+require 'sinatra'
+require 'sinatra/contrib'
+require 'sinatra/filtering_parameters'
+
+RSpec.configure do |config|
+  config.include Rack::Test::Methods
+  config.include Sinatra::TestHelpers
+end
