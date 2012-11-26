@@ -14,10 +14,6 @@ describe Sinatra::FilteringParameters do
     post '/sample/foo', args[:pass_params]
   end
 
-  def result_should_be_equal(filterd_params)
-    last_response.body.should == filterd_params.to_json
-  end
-
   describe 'permitted parameters nothing' do
     it "when success" do
       post_with_filter(

@@ -11,3 +11,8 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include Sinatra::TestHelpers
 end
+
+def result_should_be_equal(filterd_params)
+  last_response.body.should == filterd_params.to_json
+end
+
