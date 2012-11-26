@@ -1,4 +1,4 @@
-= sinatra-filtering_parameters
+= Sinatra Filtering Parameters
 
 * {Homepage}[https://github.com/tyabe/sinatra-filtering_parameters#readme]
 * {Issues}[https://github.com/tyabe/sinatra-filtering_parameters/issues]
@@ -7,19 +7,23 @@
 
 == Description
 
-TODO: Description
-
-== Features
+This plugin add parameter whitelisting to a Sinatra application.
 
 == Examples
 
   require 'sinatra/filtering_parameters'
+  class App < Sinatra::Base
+    register Sinatra::FilteringParameters
 
-== Requirements
+    post '/create', :allow => [ :title, :body ] do
+      @post = Post.new(params)
+      # ...
+    end
 
 == Install
 
-  $ gem install sinatra-filtering_parameters
+# this is not yet..
+#  $ gem install sinatra-filtering_parameters
 
 == Copyright
 
