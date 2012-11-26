@@ -37,7 +37,6 @@ describe Sinatra::FilteringParameters do
       ]
     )
     result_should_be_equal({
-      "splat" => nil, "captures" => nil,
       "book" => {
         "title" => "Romeo and Juliet",
         "authors" => [{
@@ -63,7 +62,6 @@ describe Sinatra::FilteringParameters do
       ]
     )
     result_should_be_equal({
-      "splat" => nil, "captures" => nil,
       "book" => {
         "genres" => ["Tragedy"]
       }
@@ -88,7 +86,6 @@ describe Sinatra::FilteringParameters do
       ]
     )
     result_should_be_equal({
-      "splat" => nil, "captures" => nil,
       "book" => {
         "title" => "Romeo and Juliet",
         "author" => "William Shakespeare",
@@ -110,9 +107,7 @@ describe Sinatra::FilteringParameters do
         ]
       ]
     )
-    result_should_be_equal({
-      "splat" => nil, "captures" => nil
-    })
+    result_should_be_equal({})
   end
 
   it "nested array with strings that should be hashes and additional values" do
@@ -131,7 +126,6 @@ describe Sinatra::FilteringParameters do
       ]
     )
     result_should_be_equal({
-      "splat" => nil, "captures" => nil,
       "book" => {
         "title" => "Romeo and Juliet"
       }
@@ -151,9 +145,7 @@ describe Sinatra::FilteringParameters do
          ]
       ]
     )
-    result_should_be_equal({
-      "splat" => nil, "captures" => nil
-    })
+    result_should_be_equal({})
   end
 
   it "fields_for_style_nested_params" do
@@ -173,7 +165,6 @@ describe Sinatra::FilteringParameters do
       ]
     )
     result_should_be_equal({
-      "splat" => nil, "captures" => nil,
       "book" => {
         "authors_attributes" => {
           "0" => { "name" => "William Shakespeare" },
@@ -200,7 +191,6 @@ describe Sinatra::FilteringParameters do
       ]
     )
     result_should_be_equal({
-      "splat" => nil, "captures" => nil,
       "book" => {
         "authors_attributes" => {
           "-1" => { "name" => "William Shakespeare" },

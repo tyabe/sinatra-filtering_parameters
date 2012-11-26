@@ -9,7 +9,7 @@ module Sinatra
             _params = params.dup
             params.clear
             %w[ splat captures ].each do |name|
-              params[name] = _params.delete(name)
+              params[name] = _params.delete(name) if _params.include?(name)
             end
             hoge = Sinatra::FilteringParameters.allow(_params, filters)
             params.merge! hoge
