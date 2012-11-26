@@ -5,6 +5,7 @@ require 'rack/test'
 require 'sinatra'
 require 'sinatra/contrib'
 require 'sinatra/filtering_parameters'
+require 'json'
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

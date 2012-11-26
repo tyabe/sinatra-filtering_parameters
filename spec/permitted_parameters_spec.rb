@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'sinatra/filtering_parameters'
-require 'json'
 
 describe Sinatra::FilteringParameters do
 
