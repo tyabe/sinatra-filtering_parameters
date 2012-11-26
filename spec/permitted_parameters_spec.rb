@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'sinatra/filtering_parameters'
 
 describe Sinatra::FilteringParameters do
 
@@ -16,7 +15,6 @@ describe Sinatra::FilteringParameters do
   end
 
   def result_should_be_equal(filterd_params)
-    last_response.should be_ok
     last_response.body.should == filterd_params.to_json
   end
 
