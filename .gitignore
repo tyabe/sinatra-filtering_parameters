@@ -1,3 +1,5 @@
 html/
 pkg/
+tmp/
 Guardfile
+Gemfile.lock
