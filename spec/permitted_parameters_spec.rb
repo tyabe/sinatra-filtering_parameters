@@ -4,14 +4,14 @@ describe Sinatra::FilteringParameters do
 
   describe 'support matching parameters' do
     it 'for splat' do
-      mock_route '/say/*/to/*' do
+      mock_route '/say/*/to/*', :allow => :hoo do
         params[:splat].should == ['hello','world']
       end
       get '/say/hello/to/world'
     end
 
     it 'for captures' do
-      mock_route %r{/hello/([\w]+)} do
+      mock_route %r{/hello/([\w]+)}, :allow => :hoo do
         params[:captures].should == ['world']
       end
       get '/hello/world'
