@@ -13,6 +13,7 @@ end
 
 def mock_route(path, opts={}, &block)
   mock_app do
+    include RSpec::Matchers
     register Sinatra::FilteringParameters
     %w(get post put delete head options patch).each do |verb|
       send(verb.to_sym, path, opts, &block)

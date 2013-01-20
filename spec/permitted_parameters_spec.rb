@@ -26,7 +26,7 @@ describe Sinatra::FilteringParameters do
         params[:bar].should == 'bar'
         params[:baz].should == 'baz'
         params[:captures].should == ['1']
-        params[:splat].should == []
+        params[:splat].should be_empty
       end
       post '/pages/1', :foo => 'foo', :bar => 'bar', :baz => 'baz'
     end
@@ -36,7 +36,7 @@ describe Sinatra::FilteringParameters do
     def should_with(filter={})
       mock_route '/pages', filter do
         params.delete('foo').should == 'foo'
-        params.each { |param| param.should == nil }
+        params.each { |param| param.should be_nil }
       end
       post '/pages', :foo => 'foo', :bar => 'bar', :baz => 'baz'
     end
@@ -49,7 +49,7 @@ describe Sinatra::FilteringParameters do
   context 'parameter will be empty when specify in' do
     def should_with(filter={})
       mock_route '/pages', filter do
-        params.each { |param| param.should == nil }
+        params.each { |param| param.should be_nil }
       end
       post '/pages', :foo => 'foo', :bar => 'bar', :baz => 'baz'
     end

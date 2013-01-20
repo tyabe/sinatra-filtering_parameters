@@ -31,9 +31,9 @@ describe Sinatra::FilteringParameters do
       params['book']['authors'][0]['name'].should == 'William Shakespeare'
       params['book']['authors'][1]['name'].should == 'Christopher Marlowe'
       params['book']['details']['pages'].should == '200'
-      params['book']['details']['genre'].should == nil
-      params['book']['authors'][1]['born'].should == nil
-      params['magazine'].should == nil
+      params['book']['details']['genre'].should be_nil
+      params['book']['authors'][1]['born'].should be_nil
+      params['magazine'].should be_nil
     end
     post '/', parameters
   end
@@ -88,7 +88,7 @@ describe Sinatra::FilteringParameters do
       ]
     }
     mock_route '/', :allow => keys do
-      params.should == {}
+      params.should be_empty
     end
     post '/', parameters
   end
@@ -124,7 +124,7 @@ describe Sinatra::FilteringParameters do
        ]
     ]
     mock_route '/', :allow => keys do
-      params.should == {}
+      params.should be_empty
     end
     post '/', parameters
   end
