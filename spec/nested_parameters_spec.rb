@@ -32,13 +32,13 @@ describe Sinatra::FilteringParameters do
       ]
     }
     expect_with parameters, keys do
-      params['book']['title'].should == 'Romeo and Juliet'
-      params['book']['authors'][0]['name'].should == 'William Shakespeare'
-      params['book']['authors'][1]['name'].should == 'Christopher Marlowe'
-      params['book']['details']['pages'].should == '200'
-      params['book']['details']['genre'].should be_nil
-      params['book']['authors'][1]['born'].should be_nil
-      params['magazine'].should be_nil
+      params[:book][:title].should == 'Romeo and Juliet'
+      params[:book][:authors][0][:name].should == 'William Shakespeare'
+      params[:book][:authors][1][:name].should == 'Christopher Marlowe'
+      params[:book][:details][:pages].should == '200'
+      params[:book][:details][:genre].should be_nil
+      params[:book][:authors][1][:born].should be_nil
+      params[:magazine].should be_nil
     end
   end
 
@@ -52,7 +52,7 @@ describe Sinatra::FilteringParameters do
       :book => :genres
     }
     expect_with parameters, keys do
-      params['book']['genres'].should == ['Tragedy']
+      params[:book][:genres].should == ['Tragedy']
     end
   end
 
@@ -72,9 +72,9 @@ describe Sinatra::FilteringParameters do
       "magazine"
     ]
     expect_with parameters, keys do
-      params['book']['title'].should == 'Romeo and Juliet'
-      params['book']['author'].should == 'William Shakespeare'
-      params['magazine'].should == 'Shakespeare Today'
+      params[:book][:title].should == 'Romeo and Juliet'
+      params[:book][:author].should == 'William Shakespeare'
+      params[:magazine].should == 'Shakespeare Today'
     end
   end
 
@@ -108,7 +108,7 @@ describe Sinatra::FilteringParameters do
       ]
     ]
     expect_with parameters, keys do
-      params['book']['title'].should == 'Romeo and Juliet'
+      params[:book][:title].should == 'Romeo and Juliet'
     end
   end
 
@@ -143,8 +143,8 @@ describe Sinatra::FilteringParameters do
       ]
     ]
     expect_with parameters, keys do
-      params['book']['authors_attributes']['0']['name'].should == 'William Shakespeare'
-      params['book']['authors_attributes']['1']['name'].should == 'Unattributed Assistant'
+      params[:book][:authors_attributes]['0'][:name].should == 'William Shakespeare'
+      params[:book][:authors_attributes]['1'][:name].should == 'Unattributed Assistant'
     end
   end
 
@@ -163,8 +163,8 @@ describe Sinatra::FilteringParameters do
       ]
     ]
     expect_with parameters, keys do
-      params['book']['authors_attributes']['-1']['name'].should == 'William Shakespeare'
-      params['book']['authors_attributes']['-2']['name'].should == 'Unattributed Assistant'
+      params[:book][:authors_attributes]['-1'][:name].should == 'William Shakespeare'
+      params[:book][:authors_attributes]['-2'][:name].should == 'Unattributed Assistant'
     end
   end
 
