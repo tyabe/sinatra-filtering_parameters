@@ -2,15 +2,6 @@ require 'spec_helper'
 
 describe Sinatra::FilteringParameters do
 
-  def mock_route(path, opts={}, &block)
-    mock_app do
-      register Sinatra::FilteringParameters
-      %w(get post put delete head options patch).each do |verb|
-        send(verb.to_sym, path, opts, &block)
-      end
-    end
-  end
-
   describe 'support matching parameters' do
     it 'for splat' do
       mock_route '/say/*/to/*' do
