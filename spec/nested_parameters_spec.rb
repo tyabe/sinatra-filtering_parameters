@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Sinatra::FilteringParameters do
 
+  def expect_with(parameters, keys, &block)
+    mock_route '/', :allow => keys, &block
+    post '/', parameters
+  end
+
   it "permitted nested parameters" do
     parameters = {
       :book => {
@@ -26,7 +31,7 @@ describe Sinatra::FilteringParameters do
         :details => :pages
       ]
     }
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params['book']['title'].should == 'Romeo and Juliet'
       params['book']['authors'][0]['name'].should == 'William Shakespeare'
       params['book']['authors'][1]['name'].should == 'Christopher Marlowe'
@@ -35,7 +40,6 @@ describe Sinatra::FilteringParameters do
       params['book']['authors'][1]['born'].should be_nil
       params['magazine'].should be_nil
     end
-    post '/', parameters
   end
 
   it "nested arrays with strings" do
@@ -47,10 +51,9 @@ describe Sinatra::FilteringParameters do
     keys = {
       :book => :genres
     }
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params['book']['genres'].should == ['Tragedy']
     end
-    post '/', parameters
   end
 
   it "permit may specify symbols or strings" do
@@ -68,12 +71,11 @@ describe Sinatra::FilteringParameters do
       ]},
       "magazine"
     ]
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params['book']['title'].should == 'Romeo and Juliet'
       params['book']['author'].should == 'William Shakespeare'
       params['magazine'].should == 'Shakespeare Today'
     end
-    post '/', parameters
   end
 
   it "nested array with strings that should be hashes" do
@@ -87,10 +89,9 @@ describe Sinatra::FilteringParameters do
         :genres => :type
       ]
     }
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params.should be_empty
     end
-    post '/', parameters
   end
 
   it "nested array with strings that should be hashes and additional values" do
@@ -106,10 +107,9 @@ describe Sinatra::FilteringParameters do
         :genres => :type
       ]
     ]
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params['book']['title'].should == 'Romeo and Juliet'
     end
-    post '/', parameters
   end
 
   it "nested string that should be a hash" do
@@ -123,10 +123,9 @@ describe Sinatra::FilteringParameters do
         :genres => :type
        ]
     ]
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params.should be_empty
     end
-    post '/', parameters
   end
 
   it "fields_for_style_nested_params" do
@@ -143,11 +142,10 @@ describe Sinatra::FilteringParameters do
         :authors_attributes => :name
       ]
     ]
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params['book']['authors_attributes']['0']['name'].should == 'William Shakespeare'
       params['book']['authors_attributes']['1']['name'].should == 'Unattributed Assistant'
     end
-    post '/', parameters
   end
 
   it "fields_for_style_nested_params with negative numbers" do
@@ -164,11 +162,10 @@ describe Sinatra::FilteringParameters do
         :authors_attributes => :name
       ]
     ]
-    mock_route '/', :allow => keys do
+    expect_with parameters, keys do
       params['book']['authors_attributes']['-1']['name'].should == 'William Shakespeare'
       params['book']['authors_attributes']['-2']['name'].should == 'Unattributed Assistant'
     end
-    post '/', parameters
   end
 
 end
