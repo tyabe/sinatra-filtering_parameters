@@ -2,6 +2,27 @@ require 'spec_helper'
 
 describe Sinatra::FilteringParameters do
 
+  describe 'Enable string or symbol key access to the nested params hash' do
+    def expect_with(parameters, keys, &block)
+      mock_route '/', &block
+      post '/', parameters
+    end
+
+    it 'with filter of hash' do
+      parameters = {
+        :book => {
+          :title => "Romeo and Juliet"
+        }
+      }
+      expect_with parameters, :allow => { :book => :title } do
+        params['book']['title'].should == 'Romeo and Juliet'
+        params[:book]['title'].should  == 'Romeo and Juliet'
+        params[:book][:title].should  == 'Romeo and Juliet'
+        params['book'][:title].should  == 'Romeo and Juliet'
+      end
+    end
+  end
+
   describe 'support matching parameters' do
     it 'for splat' do
       mock_route '/say/*/to/*', :allow => :hoo do

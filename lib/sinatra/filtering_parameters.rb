@@ -6,13 +6,13 @@ module Sinatra
       def registered(app)
         app.set(:allow) do |*filters|
           condition do
-            _params = params.dup
-            params.clear
+            original = @params.dup
+            @params.clear
             %w[ splat captures ].each do |name|
-              params[name] = _params.delete(name) if _params.include?(name)
+              @params[name] = original.delete(name) if original.include?(name)
             end
-            hoge = Sinatra::FilteringParameters.allow(_params, filters)
-            params.merge! hoge
+            allow_params = Sinatra::FilteringParameters.allow(original, filters)
+            @params.merge! indifferent_params(allow_params)
           end
         end
       end
