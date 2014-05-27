@@ -37,7 +37,7 @@ module Sinatra
             end
           when Hash
             _params = {}
-            filter.keys.map(&:to_s).each { |k| _params[k] = params[k] if params.has_key?(k) }
+            filter.keys.map(&:to_s).each { |k| _params[k] = params[k] if params.key?(k) && !params[k].nil? }
             _params.each do |key, value|
               case value
               when Array

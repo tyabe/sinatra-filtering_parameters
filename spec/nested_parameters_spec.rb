@@ -168,4 +168,22 @@ describe Sinatra::FilteringParameters do
     end
   end
 
+  it "nested array with nil values should be filtred" do
+    parameters = {
+      :book => {
+        :genre => "Tragedy",
+        :revisor => nil
+      }
+    }
+    keys = [
+      :book => [
+        :genre,
+        :revisor
+      ]
+    ]
+    expect_with parameters, keys do
+      params[:book][:genre].should == "Tragedy"
+      params[:book][:revisor].should be_nil
+    end
+  end
 end
